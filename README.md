@@ -103,7 +103,7 @@ terraform destroy
 
 ### Screenshot
 
-![SSH to EC2](docs/2025-09-15_23-31-41.png)
+![SSH to EC2](docs/ssh_ec2.png)
 
 ### Diagram
 
