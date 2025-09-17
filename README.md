@@ -105,6 +105,6 @@ terraform destroy
 
 ![SSH to EC2](docs/ssh_ec2.png)
 
-### Diagram
+### Infrastructure Diagram
 
-![Infrastructure Graph](docs/graph.png)
+![Infrastructure Graph](docs/cf.gif)

@@ -19,3 +19,4 @@ Gemfile.lock
 # Checkov files
 .external_modules
 .external_modules/*
+log
