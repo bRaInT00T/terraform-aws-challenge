@@ -50,9 +50,7 @@ module "alb_sg" {
   }
   egress_rules = {
     https = {
-      from_port   = 443
-      to_port     = 443
-      ip_protocol = "tcp"
+      ip_protocol = "-1"
       cidr_ipv4   = "0.0.0.0/0"
     }
   }

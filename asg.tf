@@ -1,8 +1,9 @@
 resource "aws_autoscaling_group" "app_asg" {
-  name             = "${var.resource_prefix}-asg"
-  desired_capacity = 2
-  min_size         = 2
-  max_size         = 6
+  name              = "${var.resource_prefix}-asg"
+  desired_capacity  = 2
+  min_size          = 2
+  max_size          = 6
+  health_check_type = "EC2"
   vpc_zone_identifier = [
     module.vpc_nfw.subnets["sub3-private-us-east-1a"].id,
     module.vpc_nfw.subnets["sub4-private-us-east-1b"].id
@@ -51,10 +52,10 @@ module "asg_sg" {
   vpc_id         = module.vpc_nfw.vpc_id
   ingress_rules = {
     https = {
-      from_port   = 443
-      to_port     = 443
-      ip_protocol = "tcp"
-      cidr_ipv4   = "0.0.0.0/0"
+      from_port                    = 443
+      to_port                      = 443
+      ip_protocol                  = "tcp"
+      referenced_security_group_id = module.alb_sg.id
     }
   }
   egress_rules = {

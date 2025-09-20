@@ -20,3 +20,4 @@ Gemfile.lock
 .external_modules
 .external_modules/*
 log
+docs/cf_challenge.drawio

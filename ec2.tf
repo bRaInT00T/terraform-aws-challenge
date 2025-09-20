@@ -19,9 +19,10 @@ module "ec2" {
 
   iam_profile = aws_iam_instance_profile.ec2_logging_profile.name
 
-  user_data                  = file("${path.module}/userdata/ec2_apache_setup.sh")
-  associate_public_ip        = true
-  additional_security_groups = [module.ec2_sg.id]
+  user_data                   = file("${path.module}/userdata/ec2_apache_setup.sh")
+  user_data_replace_on_change = true
+  associate_public_ip         = true
+  additional_security_groups  = [module.ec2_sg.id]
 }
 
 module "ec2_sg" {
@@ -35,6 +36,24 @@ module "ec2_sg" {
       to_port     = 22
       ip_protocol = "tcp"
       cidr_ipv4   = var.ssh_cidr
+    }
+    allow_http = {
+      from_port   = 80
+      to_port     = 80
+      ip_protocol = "tcp"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+    allow_https = {
+      from_port   = 443
+      to_port     = 443
+      ip_protocol = "tcp"
+      cidr_ipv4   = "0.0.0.0/0"
+    }
+  }
+  egress_rules = {
+    allow_all = {
+      ip_protocol = "-1"
+      cidr_ipv4   = "0.0.0.0/0"
     }
   }
 }
